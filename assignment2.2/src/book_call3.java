@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class book_call3
 	{
@@ -49,28 +50,36 @@ public class book_call3
 	static String user_choice()
 		{
 			Scanner sort_type = new Scanner(System.in);
-			System.out.println("Sort books alphabetically or by number of chapers? ");
+			System.out.println("Welcome to the New Testament BibleBooks display");
+			System.out.println("Sort books alphabetically or by number of chapters? ");
 			System.out.println("Please type either title or chapter");
 			String sort_input = sort_type.nextLine();
 			sort_type.close();
-			System.out.println("New Testament books will be sorted by " + sort_input);
+			System.out.println("You chose to sort by " + sort_input);
 			System.out.println();
 			return sort_input;
 		}
 	
 	static void titleSort(String[] NTbooks_array)
 		{
-			Arrays.sort(NTbooks_array);
+			for (int i = 0; i < NTbooks_array.length; i++)
+				{
+					for (int j = i+1; j < NTbooks_array.length; j++)
+						{
+							if (NTbooks_array[i].compareTo(NTbooks_array[j]) > 0)
+								{
+									String temp = NTbooks_array[i];
+									NTbooks_array[i] = NTbooks_array[j];
+									NTbooks_array[j] = temp;
+								}
+						}
+				}
 			// create new string and array to split NTbooks_array into title/chapters/summary
 			// performing here, after sort by title
 			String sorted_title = String.join(":", NTbooks_array);
 			String[] title_array = sorted_title.split(":");
-			
-			// test printing for String sorted_title and String[] title_array
-			// System.out.println(sorted_title);
-			// System.out.println(Arrays.toString(title_array));
 					
-			for (int i = 0; i < title_array.length; i = i+3)
+			for (int i = 0; i < title_array.length; i+=3)
 				{
 					String title = title_array[i];
 					Object chapters = title_array[i+1];
@@ -82,7 +91,33 @@ public class book_call3
 	
 	static void chapterSort(String[] NTbooks_array)
 		{
-			// add sort by chapter here
+			String strBychapter = String.join(":", NTbooks_array);
+			String[] chapter_array = strBychapter.split(":");
+			
+			for (int i = 1; i < chapter_array.length; i+=3)
+				{
+					for (int j = i+3; j < chapter_array.length; j+=3)
+						{
+							if (chapter_array[i].compareTo(chapter_array[j]) > 0)
+								{
+									String temp = chapter_array[i];
+									chapter_array[i] = chapter_array[j];
+									// move title and summary elements with chapter
+									chapter_array[i-1] = chapter_array[j-1];
+									chapter_array[i+1] = chapter_array[j+1];
+									chapter_array[j] = temp;
+								}
+						}
+				}
+			// System.out.print(Arrays.toString(chapter_array));
+			for (int i = 0; i < chapter_array.length; i+=3)
+			{
+				String title = chapter_array[i];
+				Object chapters = chapter_array[i+1];
+				String summary = chapter_array[i+2];
+				BibleBooks_sort add_book = new BibleBooks_sort(title, chapters, summary);
+				add_book.display();
+			}	
 		}
 	
 	}
