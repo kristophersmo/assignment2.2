@@ -7,25 +7,18 @@
 
 public class BibleBooks_sort
 	{
-		private Object title;
+		private String title;
 		private Object chapters;
-		private Object summary;
+		private String summary;
 	
 	// create constructor for (class) BibleBook
-	public BibleBooks_sort(Object i)
+	public BibleBooks_sort(String title, Object chapters, String summary)
 		{
-			this.title = i;
+			this.title = title;
+			this.chapters = chapters;
+			this.summary = summary;
 		}
-	// assign number of chapters to variable chapters
-	public void num_chapters(Object book_chapters)
-		{
-			chapters = book_chapters;
-		}
-	// assign summary to variable summary
-	public void theme(Object book_summary)
-		{
-			summary = book_summary;
-		}
+
 	public void display()
 		{
 			System.out.println(title +" (" + chapters + " chapters)" + " - " + summary);

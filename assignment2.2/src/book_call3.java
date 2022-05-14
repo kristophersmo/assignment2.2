@@ -10,14 +10,14 @@ import java.util.Scanner;
 
 public class book_call3
 	{
-	public static void main(String[] args)
-		{
-		try
+		public static void main(String[] args)
 			{
-				Scanner fileIn = new Scanner(new File(System.getProperty("user.dir") + "/src/New_Testament_books.dat"))
-				.useDelimiter("\n");
-				List<String> book_list = new ArrayList<String>();
-				while(fileIn.hasNext())
+				try
+					{
+						Scanner fileIn = new Scanner(new File(System.getProperty("user.dir") + "/src/New_Testament_books.dat"))
+						.useDelimiter("\n");
+						List<String> book_list = new ArrayList<String>();
+						while(fileIn.hasNext())
 					{
 						String items = fileIn.next();
 						book_list.add(items);
@@ -29,43 +29,17 @@ public class book_call3
 				// System.out.println(Arrays.toString(NTbooks_array));
 				
 				String sort_input = user_choice();
-				System.out.println("New Testament books will be sorted by " + sort_input);
-				System.out.println();
 				
 				if (sort_input.compareTo("title") == 0)
 					{
-						// String[] NTbooks_title = new String[book_list.size()];
-						for (int i = 0; i < NTbooks_array.length; i++)
-							{
-								for (int j = i+1; j < NTbooks_array.length; j++)
-									{
-										if (NTbooks_array[i].compareTo(NTbooks_array[j]) > 0)
-											{
-												String temp = NTbooks_array[i];
-												NTbooks_array[i] = NTbooks_array[j];
-												NTbooks_array[j] = temp;
-											}
-									}
-							}
-						// System.out.println(Arrays.toString(NTbooks_array));	
-						for (int i = 0; i < NTbooks_array.length; i++)
-						{
-							BibleBooks_sort add_book = new BibleBooks_sort(NTbooks_array[i]);
-							add_book.num_chapters(NTbooks_array[i]);
-							add_book.theme(NTbooks_array[i]);
-							add_book.display();
-						}
+						titleSort(NTbooks_array);
 					}
-				// if (sort_input.compareTo("chapter") == 0)
-						// {
-						
-						// }
-				else
+				else if (sort_input.compareTo("chapter") == 0)
 					{
-						System.out.println("Invalid input. Please try again");
-						return;
+						chapterSort(NTbooks_array);
 					}
-			}
+				}
+				
 		catch(Exception e)
 			{
 				System.err.println(e.toString());
@@ -79,6 +53,35 @@ public class book_call3
 			System.out.println("Please type either title or chapter");
 			String sort_input = sort_type.nextLine();
 			sort_type.close();
+			System.out.println("New Testament books will be sorted by " + sort_input);
+			System.out.println();
 			return sort_input;
 		}
+	
+	static void titleSort(String[] NTbooks_array)
+		{
+			Arrays.sort(NTbooks_array);
+			// create string and new array to split NTbooks_array into title/chapters/summary
+			String sorted_title = String.join(":", NTbooks_array);
+			String[] title_array = sorted_title.split(":");
+			
+			// test printing for String sorted_title and String[] title_array
+			// System.out.println(sorted_title);
+			// System.out.println(Arrays.toString(title_array));
+					
+			for (int i = 0; i < title_array.length; i = i+3)
+				{
+					String title = title_array[i];
+					Object chapters = title_array[i+1];
+					String summary = title_array[i+2];
+					BibleBooks_sort add_book = new BibleBooks_sort(title, chapters, summary);
+					add_book.display();
+				}	
+		}
+	
+	static void chapterSort(String[] NTbooks_array)
+		{
+		
+		}
+	
 	}
