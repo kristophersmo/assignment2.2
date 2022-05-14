@@ -1,6 +1,7 @@
-// BibleBooks sorting assignment by Kristopher Smolarek (CSC250)
+// Assignment2.2 - CSC250
 // Read New Testament books from file "New_Testament_books.dat"
-// Sort and display based on user choice for sorting method
+// Get user input for sorting method, sort/display based on user choice
+// by Kristopher Smolarek
 
 import java.io.File;
 import java.util.ArrayList;
@@ -24,27 +25,26 @@ public class book_call3
 					}
 						fileIn.close();
 					
-				String[] NTbooks_array = new String[book_list.size()];
-				book_list.toArray(NTbooks_array);
-				// System.out.println(Arrays.toString(NTbooks_array));
+						String[] NTbooks_array = new String[book_list.size()];
+						book_list.toArray(NTbooks_array);
+						// System.out.println(Arrays.toString(NTbooks_array));
 				
-				String sort_input = user_choice();
-				
-				if (sort_input.compareTo("title") == 0)
-					{
-						titleSort(NTbooks_array);
+						String sort_input = user_choice();
+						if (sort_input.compareTo("title") == 0)
+							{
+								titleSort(NTbooks_array);
+							}
+						else if (sort_input.compareTo("chapter") == 0)
+							{
+								chapterSort(NTbooks_array);
+							}
 					}
-				else if (sort_input.compareTo("chapter") == 0)
-					{
-						chapterSort(NTbooks_array);
-					}
-				}
 				
-		catch(Exception e)
-			{
-				System.err.println(e.toString());
+				catch(Exception e)
+					{
+						System.err.println(e.toString());
+					}
 			}
-		}
 	
 	static String user_choice()
 		{
@@ -61,7 +61,8 @@ public class book_call3
 	static void titleSort(String[] NTbooks_array)
 		{
 			Arrays.sort(NTbooks_array);
-			// create string and new array to split NTbooks_array into title/chapters/summary
+			// create new string and array to split NTbooks_array into title/chapters/summary
+			// performing here, after sort by title
 			String sorted_title = String.join(":", NTbooks_array);
 			String[] title_array = sorted_title.split(":");
 			
@@ -81,7 +82,7 @@ public class book_call3
 	
 	static void chapterSort(String[] NTbooks_array)
 		{
-		
+			// add sort by chapter here
 		}
 	
 	}
