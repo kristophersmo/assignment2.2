@@ -1,6 +1,6 @@
-// Assignment2.2 - CSC250 by Kristopher Smolarek
-// Read New Testament books from file "New_Testament_books.dat"
-// Get user input for sorting method, sort/display based on user choice
+// assignment2.2 - CSC250 by Kristopher Smolarek
+// title, chapters, summary from book_call3 (read in from New_Testament_books.dat)
+// single constructor and display method for book data
 
 public class BibleBooks_sort
 {

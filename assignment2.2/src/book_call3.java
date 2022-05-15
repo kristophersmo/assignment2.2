@@ -1,6 +1,6 @@
-// Assignment2.2 - CSC250 by Kristopher Smolarek
-// Read New Testament books from file "New_Testament_books.dat"
-// Get user input for sorting method, sort/display based on user choice
+// assignment2.2 - CSC250 by Kristopher Smolarek
+// reading New Testament books from file "New_Testament_books.dat"
+// get user input for sorting method, sort/display based on user choice
 
 import java.io.File;
 import java.util.ArrayList;
@@ -34,11 +34,18 @@ public class book_call3
 			if (sort_input.compareTo("title") == 0)
 				{
 					titleSort(booksArray);
+					return;
 				}
-			else if (sort_input.compareTo("chapter") == 0)
+			if (sort_input.compareTo("chapter") == 0)
 				{
 					chapterSort(booksArray);
+					return;
 				}
+			else if (sort_input.compareTo("chapter") != 0 || sort_input.compareTo("title") != 0) 
+			{
+				System.out.println("Invalid input.  Please try again.");
+				return;
+			}
 		}
 		catch(Exception e)
 		{
@@ -103,7 +110,7 @@ public class book_call3
 				{
 					String temp = chapter_array[i];
 					chapter_array[i] = chapter_array[j];
-					// move title and summary elements with chapter
+					// next 2 lines, move title and summary elements together with chapter
 					chapter_array[i-1] = chapter_array[j-1];
 					chapter_array[i+1] = chapter_array[j+1];
 					chapter_array[j] = temp;
